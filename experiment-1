@@ -1,0 +1,41 @@
+mysql> use hostel;
+Database changed
+mysql> desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(3)      | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> truncate table students;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(3)      | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> insert into students values('123','navya','f','2005-10-07','7981357600');
+ERROR 1264 (22003): Out of range value for column 'mobileno' at row 1
+mysql> insert into students values('123','navya','f','2005-10-07','798135760');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * from students;
++------+-------+--------+------------+-----------+
+| id   | name  | gender | dob        | mobileno  |
++------+-------+--------+------------+-----------+
+|  123 | navya | f      | 2005-10-07 | 798135760 |
++------+-------+--------+------------+-----------+
+1 row in set (0.00 sec)
