@@ -1,0 +1,39 @@
+mysql> use hostel;
+Database changed
+mysql> SELECT * from students;
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
+|  145 | yaminee  | f      | 2014-06-12 | 630124540 |
++------+----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update students set name='yaminee' where dob='2004-03-12';
+Query OK, 0 rows affected (0.04 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from students;
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
+|  145 | yaminee  | f      | 2014-06-12 | 630124540 |
++------+----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update students set mobileno='798135760' where name='sri';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from students;
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
+|  145 | yaminee  | f      | 2014-06-12 | 630124540 |
++------+----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
