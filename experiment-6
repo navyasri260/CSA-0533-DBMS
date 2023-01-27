@@ -1,0 +1,59 @@
+mysql> use hostel;
+Database changed
+mysql> select * from students where id between 123 and 133;
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
++------+----------+--------+------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from mark where marks between 90 and 95;
++------+---------+-------+
+| id   | name    | marks |
++------+---------+-------+
+|  123 | navya   |    90 |
+|  145 | yaminee |    95 |
+|  123 | navya   |    90 |
+|  145 | yaminee |    95 |
+|  123 | navya   |    90 |
++------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select count(name) from students;
++-------------+
+| count(name) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> select avg(marks) from mark;
++------------+
+| avg(marks) |
++------------+
+|    88.5714 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from mark;
++------------+
+| sum(marks) |
++------------+
+|        620 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where gender in ('M');
+Empty set (0.00 sec)
+
+mysql> select * from students where gender in ('F');
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
+|  145 | yaminee  | f      | 2014-06-12 | 630124540 |
++------+----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
