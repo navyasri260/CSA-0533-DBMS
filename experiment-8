@@ -1,0 +1,40 @@
+mysql> use rooms;
+Database changed
+mysql> create table rooms values(id int(3),name varchar(15),totalrooms int(3),hostelfee int(3),AC varchar(4));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(id int(3),name varchar(15),totalrooms int(3),hostelfee int(3),AC varchar(' at line 1
+mysql> create table rooms(id int(3),name varchar(15),totalrooms int(3),hostelfee int(3),AC varchar(4));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc rooms;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id         | int(3)      | YES  |     | NULL    |       |
+| name       | varchar(15) | YES  |     | NULL    |       |
+| totalrooms | int(3)      | YES  |     | NULL    |       |
+| hostelfee  | int(3)      | YES  |     | NULL    |       |
+| AC         | varchar(4)  | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.04 sec)
+
+mysql> insert into rooms values('123','navya','120','50000','yes');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into rooms values('123','poojitha','120','45000','no');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into rooms values('145','yaminee','120','50000','yes');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from rooms;
++------+----------+------------+-----------+------+
+| id   | name     | totalrooms | hostelfee | AC   |
++------+----------+------------+-----------+------+
+|  123 | navya    |        120 |     50000 | yes  |
+|  123 | poojitha |        120 |     45000 | no   |
+|  145 | yaminee  |        120 |     50000 | yes  |
++------+----------+------------+-----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from rooms where id in(select id from rooms where hostelfee<45000);
+Empty set (0.03 sec)
