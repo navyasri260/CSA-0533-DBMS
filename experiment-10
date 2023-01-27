@@ -1,0 +1,57 @@
+mysql> use rooms;
+Database changed
+mysql> select * from rooms;
++------+----------+------------+-----------+------+
+| id   | name     | totalrooms | hostelfee | AC   |
++------+----------+------------+-----------+------+
+|  123 | navya    |        120 |     50000 | yes  |
+|  123 | poojitha |        120 |     45000 | no   |
+|  145 | yaminee  |        120 |     50000 | yes  |
++------+----------+------------+-----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from details;
++------+----------+------------+
+| id   | name     | doj        |
++------+----------+------------+
+|  123 | navya    | 2022-08-08 |
+|  123 | navya    | 2022-08-08 |
+|  123 | poojitha | 2022-08-05 |
+|  145 | yaminee  | 2022-08-07 |
++------+----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> create view studentdetails as select name,hostelfee from room order by name;
+ERROR 1146 (42S02): Table 'rooms.room' doesn't exist
+mysql> create view studentdetails as select name,hostelfee from rooms order by name;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> selecct * from studentdetails;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecct * from studentdetails' at line 1
+mysql> select * from studentdetails;
++----------+-----------+
+| name     | hostelfee |
++----------+-----------+
+| navya    |     50000 |
+| poojitha |     45000 |
+| yaminee  |     50000 |
++----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> create index studentid on hostel(id);
+ERROR 1146 (42S02): Table 'rooms.hostel' doesn't exist
+mysql> create index studentid on room(id);
+ERROR 1146 (42S02): Table 'rooms.room' doesn't exist
+mysql> create index studentid on rooms(id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from rooms;
++------+----------+------------+-----------+------+
+| id   | name     | totalrooms | hostelfee | AC   |
++------+----------+------------+-----------+------+
+|  123 | navya    |        120 |     50000 | yes  |
+|  123 | poojitha |        120 |     45000 | no   |
+|  145 | yaminee  |        120 |     50000 | yes  |
++------+----------+------------+-----------+------+
+3 rows in set (0.00 sec)
