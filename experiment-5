@@ -1,0 +1,228 @@
+
+mysql> use hostel;
+Database changed
+mysql> desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(3)      | YES  |     | NULL    |       |
+| name     | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from students;
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
+|  145 | yaminee  | f      | 2014-06-12 | 630124540 |
++------+----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where id=145;
++------+---------+--------+------------+-----------+
+| id   | name    | gender | dob        | mobileno  |
++------+---------+--------+------------+-----------+
+|  145 | yaminee | f      | 2014-06-12 | 630124540 |
++------+---------+--------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where id between 145 and 255;
++------+---------+--------+------------+-----------+
+| id   | name    | gender | dob        | mobileno  |
++------+---------+--------+------------+-----------+
+|  145 | yaminee | f      | 2014-06-12 | 630124540 |
++------+---------+--------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> desc mark;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(6)      | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| marks | int(3)      | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into mark values('123','navya','90');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from mark;
++------+----------+-------+
+| id   | name     | marks |
++------+----------+-------+
+|  123 | navya    |    90 |
+|  123 | poojitha |    80 |
+|  145 | yaminee  |    95 |
+|  123 | navya    |    90 |
+|  123 | poojitha |    80 |
+|  145 | yaminee  |    95 |
+|  123 | navya    |    90 |
++------+----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select max(marks) from mark;
++------------+
+| max(marks) |
++------------+
+|         95 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from mark;
++------------+
+| min(marks) |
++------------+
+|         80 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from mark;
++------------+
+| sum(marks) |
++------------+
+|        620 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name LIKE '%AA';
+Empty set (0.00 sec)
+
+mysql> select * from students where name LIKE '%NI';
+Empty set (0.00 sec)
+
+mysql> select * from students where name LIKE '%NA';
+Empty set (0.00 sec)
+
+mysql> select * from students where name LIKE '%CH';
+Empty set (0.00 sec)
+
+mysql> select * from students where name LIKE '%ch';
+Empty set (0.00 sec)
+
+mysql> select * from students where regno 123 and 143;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '123 and 143' at line 1
+mysql> select * from students where id 123 and 143;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '123 and 143' at line 1
+mysql> select * from students where id 123 and 145;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '123 and 145' at line 1
+mysql> select * from students where id between 123 and 145;
++------+----------+--------+------------+-----------+
+| id   | name     | gender | dob        | mobileno  |
++------+----------+--------+------------+-----------+
+|  123 | navya    | f      | 2005-10-07 | 798135760 |
+|  123 | poojitha | f      | 2004-04-12 | 123456789 |
+|  145 | yaminee  | f      | 2014-06-12 | 630124540 |
++------+----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from mark where marks between 90 and 95;
++------+---------+-------+
+| id   | name    | marks |
++------+---------+-------+
+|  123 | navya   |    90 |
+|  145 | yaminee |    95 |
+|  123 | navya   |    90 |
+|  145 | yaminee |    95 |
+|  123 | navya   |    90 |
++------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select count(name),id from students
+    -> group by id having count(name)>0;
++-------------+------+
+| count(name) | id   |
++-------------+------+
+|           2 |  123 |
+|           1 |  145 |
++-------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(marks) from mark;
++------------+
+| avg(marks) |
++------------+
+|    88.5714 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks)from mark;
++------------+
+| sum(marks) |
++------------+
+|        620 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select name,gender,dob from students order by id;
++----------+--------+------------+
+| name     | gender | dob        |
++----------+--------+------------+
+| navya    | f      | 2005-10-07 |
+| poojitha | f      | 2004-04-12 |
+| yaminee  | f      | 2014-06-12 |
++----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> selecct name,gender,dob from students order by name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecct name,gender,dob from students order by name' at line 1
+mysql> select name,gender,dob from students order by name;
++----------+--------+------------+
+| name     | gender | dob        |
++----------+--------+------------+
+| navya    | f      | 2005-10-07 |
+| poojitha | f      | 2004-04-12 |
+| yaminee  | f      | 2014-06-12 |
++----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from mark;
++------+----------+-------+
+| id   | name     | marks |
++------+----------+-------+
+|  123 | navya    |    90 |
+|  123 | poojitha |    80 |
+|  145 | yaminee  |    95 |
+|  123 | navya    |    90 |
+|  123 | poojitha |    80 |
+|  145 | yaminee  |    95 |
+|  123 | navya    |    90 |
++------+----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name,marks from mark order by marks DESC;
++----------+-------+
+| name     | marks |
++----------+-------+
+| yaminee  |    95 |
+| yaminee  |    95 |
+| navya    |    90 |
+| navya    |    90 |
+| navya    |    90 |
+| poojitha |    80 |
+| poojitha |    80 |
++----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select count(name) from students;
++-------------+
+| count(name) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name), id from students
+    -> group by id having count(name)>0;
++-------------+------+
+| count(name) | id   |
++-------------+------+
+|           2 |  123 |
+|           1 |  145 |
++-------------+------+
+2 rows in set (0.00 sec)
